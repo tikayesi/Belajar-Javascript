@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, td {
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div>Nama Barang:
+    <select id="namabarang">
+  <option>Laptop</option>
+  <option>Mouse</option>
+  <option>Keyboard</option>
+  <option>HeadPhone</option>
+</select><br>
+    Jumlah: <input type="number" id="jumlah" /><br>
+    Harga: <input type="number" id="harga" /><br>
+    </div>
+<button onclick="myCreateFunction()">Tambah</button>
+<table id="mytab">
+<thead>
+  <tr>
+    <td>No</td>
+    <td>Nama Barang</td>
+    <td>Jumlah</td>
+    <td>harga</td>
+    <td>diskon</td>
+    <td>Total Harga Barang</td>
+    <td>Action</td>
+  </tr>
+  </thead>
+  <tbody id="myTable">
+  </tbody>
+  <tfoot>
+  <tr>
+  <td >Jumlah Barang</td>
+  <td id = "tf"></td>
+  <td>Total Diskon</td>
+  <td  id="td"></td>
+  <td>Total</td>
+  <td id="th"></td>
+  <td>Total Bayar</td>
+  <td id ="tt"></td>
+  </tr>
+  </tfoot>
+</table>
+<br>
+
+<script>
+
+function myCreateFunction() {
+    namabarang = document.getElementById('namabarang').value;
+    jumlah = document.getElementById('jumlah').value;
+    harga = document.getElementById('harga').value;
+    result = jumlah * harga;
+    var diskon = 0;
+            if (jumlah > 5){
+                            diskon = result * 10/100;
+                        }
+    var panar=document.getElementById("myTable").rows.length;
+    var ambil = document.getElementById('myTable');
+
+    if(panar == null || panar == 0){
+        xnum = 0;
+    }else{
+        xnum = parseInt(ambil.rows[panar-1].cells[0].innerHTML);
+    }
+    
+    var row = ambil.insertRow(xnum[panar]);
+    var cell1 = row.insertCell(0);  
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell7 = row.insertCell(4);
+    var cell5 = row.insertCell(5);
+    var cell6 = row.insertCell();
+
+
+    cell1.innerHTML = xnum+1;
+    cell2.innerHTML = namabarang;
+    cell3.innerHTML = jumlah;
+    cell4.innerHTML = harga;
+    cell5.innerHTML = result;
+    cell7.innerHTML = diskon;
+    cell6.innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
+     var tabel = document.getElementById('myTable');
+    var sum = 0;
+    var sumVal = 0;
+    var totaldis = 0;
+    var total = 0;
+					for(var i=0; i<tabel.rows.length; i++){
+                        sum += parseInt(tabel.rows[i].cells[2].innerHTML);
+                        sumVal += parseInt(tabel.rows[i].cells[5].innerHTML);
+                        totaldis += parseInt(tabel.rows[i].cells[4].innerHTML);
+					}
+                var y = document.getElementById('tf').innerHTML = sum;
+                var x = document.getElementById('th').innerHTML = sumVal;
+                var z = document.getElementById('td').innerHTML = totaldis;
+               var xy = document.getElementById('tt').innerHTML = sumVal - totaldis;
+
+    
+
+				
+}
+
+function deleteRow(row) {
+    var i = row.parentNode.parentNode.rowIndex;
+    document.getElementById("mytab").deleteRow(i);
+     var tabel = document.getElementById('myTable');
+    var sum = 0;
+    var sumVal = 0;
+    var totaldis = 0;
+    var total = 0;
+					for(var i=0; i<tabel.rows.length; i++){
+                        sum += parseInt(tabel.rows[i].cells[2].innerHTML);
+                        sumVal += parseInt(tabel.rows[i].cells[5].innerHTML);
+                        totaldis += parseInt(tabel.rows[i].cells[4].innerHTML);
+					}
+                var y = document.getElementById('tf').innerHTML = sum;
+                var x = document.getElementById('th').innerHTML = sumVal;
+                var z = document.getElementById('td').innerHTML = totaldis;
+               var xy = document.getElementById('tt').innerHTML = sumVal - totaldis;
+}
+
+</script>
+
+</body>
+</html>
